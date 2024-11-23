@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            margin-top: 50px;
+        }
+    a{
+        padding: 20px 40px;
+        background: rgb(106, 104, 104);
+        text-decoration: none;
+        display: inline-block;
+        color: white;
+        border-radius: 10px;
+    }
+    .animation {
+    box-shadow: 0px 15px 10px 2px rgba(238, 153, 67, 0.691);
+}
+    </style>
+</head>
+<body>
+    <a href="#" class="button a">a</a>
+    <a href="#" class="button b">b</a>
+    <a href="#" class="button c">c</a>
+
+    <script>
+
+        // var audio1 = new Audio('audio/audio.mp3');
+        // var audio2 = new Audio('audio.mp3');
+        // var audio3 = new Audio('audio.mp3');
+        // document.querySelectorAll('a')[0].addEventListener('click', function(){
+        //     audio1.play();
+        //     console.log('text1');
+        // });
+        // document.querySelectorAll('a')[1].addEventListener('click', function(){
+        //     audio2.play();
+        //     console.log('text2');
+
+        // });
+        // document.querySelectorAll('a')[2].addEventListener('click', function(){
+        //     audio3.play();
+        //     console.log('text3');
+        // });
+
+
+        const a = new Audio('audio/a.mp3');
+        const b = new Audio('audio/b.mp3');
+        const c = new Audio('audio/c.mp3');
+
+        let currentAudio = null;
+
+        function toggleAudio(audio) {
+            if (currentAudio && currentAudio !== audio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0; 
+            }
+
+            if (audio.paused) {
+                audio.play(); 
+                currentAudio = audio; 
+            } else {
+                audio.pause(); 
+                currentAudio = null; 
+            }
+        }
+        
+
+        for(let i=0; i<3; i++){
+            document.querySelectorAll('a')[i].addEventListener('click', function(){
+            var text = this.innerHTML;
+                console.log(text);
+
+                playAudio(text);
+                playAnimation(text);
+            })
+        }
+
+        function playAudio(text){
+            switch (text){
+                    case "a":
+                        toggleAudio(a);
+                        break;
+
+                    case "b":
+                        toggleAudio(b);
+                        break;
+
+                    case "c":
+                        toggleAudio(c);
+                        break;
+                }
+        }
+
+
+        function playAnimation(text){
+            const selectedButton = document.querySelector("."+text);
+            selectedButton.classList.add("animation");
+
+            setTimeout(()=>{
+                selectedButton.classList.remove("animation");
+            }, 1000)
+        }
+        
+        
+    </script>
+</body>
+</html>
